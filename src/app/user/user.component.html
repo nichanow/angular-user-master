@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Insert title here</title>
+    
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+    <div class="row">
+        <div class="col-lg-12" style="padding: 25px; width:100%">
+            <div class="card" style="height:100%;width: 100%; background-color: #E3EFF3">
+                <div class="card-header" style="background-color: #00587A;">
+                    <h4 style="color: white;">ผู้ใช้งาน</h4>
+                </div>
+                <div class="card-body">
+
+                    <div style="padding: 5px;">
+                        <input type="text" placeholder="ค้นหาด้วยชื่อ.." name="search" id="myInput"
+                            style="width:30%; padding: 12px 20px 12px 10px; font-size: 15px; margin-right: 5px;">
+                        <button type="button" class="btn btn-info" (click)="search();" id="searchbtn"
+                            style="padding: 10px 5px 10px 5px; margin-right: 5px; font-size: 16px;">ค้นหา</button>
+                        <button type="button" class="btn" (click)="loadTable();" id="refreahbtn"
+                            style="padding: 10px 5px 10px 5px; background-color: #9BA4B4; color:white; font-size: 16px;">รีเฟรช</button>
+                    </div>
+
+                    <div class="row" style="padding: 20px 5px;text-align: right;">
+                        <div class="col-xs-12">
+                            <table id="tbdDemo" class="table table-striped table-bordered table-hover">
+                                <thead style="background-color: #00587A; color: #FFFF;">
+                                    <tr>
+                                        <th class="text-center">ลำดับ</th>
+                                        <th class="text-center">รหัสผู้ใช้</th>
+                                        <th class="text-center">ชื่อ-นามสกุล</th>
+                                        <th class="text-center">วันเกิด</th>
+                                        <th class="text-center">อายุ</th>
+                                        <th class="text-center">เพศ</th>
+                                        <th class="text-center">วันที่บันทึก</th>
+                                        <th class="text-center">บันทึกโดย</th>
+                                        <th class="text-center">
+                                            <button class="btn openModalBtn" data-widget="collapse" (click)="openModal(template)"
+                                                id="addbtn" style="color:black"><i class="fa fa-plus"></i></button>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody class="text-center" style="background-color: #d7eef7"></tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <ng-template #test>asdfg</ng-template>
+
+                    <div class="modal fade" id="demoModal" role="dialog">
+                        <ng-template #template>
+                            <div class="modal-content" style="width:700px;">
+                                <div class="modal-header" style="background-color:#008891;">
+                                    <h4 class="modal-title pull-left" style="color: white;">กรุณากรอกข้อมูลผู้ใช้งาน</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="row" style="padding: 10px;text-align: right;">
+                                        <div class="col-xs-2">
+                                            <label class="control-label">ชื่อ</label>
+                                        </div>
+                                        <div class="col-xs-3">
+                                            <input class="form-control" id="inName">
+                                        </div>
+                                        <div class="col-xs-2">
+                                            <label class="control-label">นามสกุล</label>
+                                        </div>
+                                        <div class="col-xs-3">
+                                            <input class="form-control" id="inLastName">
+                                        </div>
+                                    </div>
+                                    <div class="row" style="padding: 10px;text-align: right;">
+                                        <div class="col-xs-2">
+                                            <label class="control-label">วันเกิด</label>
+                                        </div>
+                                        <div class="col-xs-3">
+                                            <input class="form-control" type="date" id="inBirth" (change)="calAge()">
+                                        </div>
+                                        <!-- <div class="col-xs-3">
+                                            <input type="text"
+                                                id="inBirth" 
+                                               placeholder="วว/ดด/ปปปป"
+                                               class="form-control"
+                                               bsDatepicker
+                                               [bsConfig]="{ isAnimated: true, dateInputFormat: 'DD/MM/YYYY' }">
+                                         </div> -->
+                                        <div class="col-xs-2">
+                                            <label class="control-label">อายุ</label>
+                                        </div>
+                                        <div class="col-xs-3">
+                                            <input class="form-control" id="inAge" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="row" style="padding: 10px;text-align: right;">
+                                        <div class="col-xs-2">
+                                            <label class="control-label">เพศ</label>
+                                        </div>
+                                        <div class="col-xs-3">
+                                            <select class="form-control" id="inSex" style="padding: 2px;">
+                                              <option selected>กรุณาเลือกเพศ</option>
+                                              <option value="หญิง">หญิง</option>
+                                              <option value="ชาย">ชาย</option>
+                                            </select> 
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" (click)="modalRef.hide()">ปิด</button>
+                                    <button type="button" class="btn btn-default" (click)="addRow()" id="donebtn">บันทึก</button>
+                                </div>
+                            </div>
+
+                        </ng-template>
+                    </div>
+
+
+                    
+
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
